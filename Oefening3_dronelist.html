@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    
+    <head>
+        <script src="http://code.jquery.com/jquery-latest.min.js"
+        type="text/javascript"></script>
+        <title>Oefening 3</title>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    </head>
+    <style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 15px;
+}
+#droneId td{
+    border: hidden;
+}
+#droneFiles td{
+    border: hidden;
+}
+#droneUrl td{
+    border: hidden;
+}
+</style>
+    <body>
+        <h1>Drones List</h1>
+        <div id="mainBody">
+            <table>
+        <tr>
+          <th>id</th>
+          <th>files_loaded</th>
+          <th>url</th>
+        </tr>
+        <tr>
+          <td id="droneId"></td>
+          <td id="droneFiles"></td>
+          <td id="droneUrl"></td>
+        </tr>
+      </table>
+        </div>
+        
+        <div id="test"></div>
+    <script>
+    var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://web-ims.thomasmore.be/datadistribution/API/2.0/drones?format=json",
+  "method": "GET",
+  "headers": {
+    "authorization": "Basic aW1zOno1MTJtVDRKeVgwUExXZw==",
+    "cache-control": "no-cache",
+    "postman-token": "78dcc48a-1d21-ac74-b854-07ba32de0805"
+  }
+};
+
+    $.ajax(settings).done(function (drone) {
+//        var json = $.parseJSON(data);
+//        for (var i=0;i<json.length;++i)
+//        {
+//            $('#but').append('<div class="target">'+json[i].name+'</>');
+//        }
+          for(var i=0;i<drone.length;i++){
+              $("#droneId").append("<tr><td>" +drone[i].id+"</></>");
+              $("#droneFiles").append("<tr><td>"+ drone[i].files_loaded + "</></>");
+              $("#droneUrl").append("<tr><td>"+ drone[i].url + "</></>");
+          }
+  }).fail(function(){
+        alert('A boo boo has occurred - You may not have been entered');
+    });
+    </script>
+    </body>
+    
+    
+
+</html>
